@@ -1,7 +1,7 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>ENTER YOUR NAME : VIDHIYA LAKSHMI S</H3>
+<H3>ENTER YOUR REGISTER NO: 212223230238</H3>
 <H3>EX. NO.1</H3>
-<H3>DATE</H3>
+<H3>DATE1: 07/03/2025</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,11 +37,71 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+```
+import pandas as pd
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+```
+## Reading the dataset
+```
+df=pd.read_csv("/content/Churn_Modelling.csv", index_col="RowNumber")
+df
+```
+![image](https://github.com/user-attachments/assets/759d3626-5ef1-4102-bffe-7a6dff4d4fe6)
 
+## Dropping the unwanted Columns
 
-## OUTPUT:
-SHOW YOUR OUTPUT HERE
+```
+df.drop(['CustomerId'],axis=1,inplace=True)
+df.drop(['Surname'],axis=1,inplace=True)
+df.drop('Age',axis=1,inplace=True)
+df.drop('Geography',axis=1,inplace=True)
+df.drop('Gender',axis=1,inplace=True)
+df
+```
+![image](https://github.com/user-attachments/assets/a409a9fd-5655-4fdd-a897-f3444bc4728d)
+
+## Checking for null values
+```
+df.isnull().sum()
+```
+![image](https://github.com/user-attachments/assets/143b3730-44a1-460d-a4e1-652bf98cb899)
+
+## Checking for duplicate values and Describing the dataset
+
+```
+df.describe()
+df.duplicated()
+```
+![image](https://github.com/user-attachments/assets/a0d68f2b-f8f1-481b-8ec0-c696a7c221bf)
+
+## Scaling the dataset
+```
+scaler=StandardScaler()
+df1=pd.DataFrame(scaler.fit_transform(df))
+df1
+```
+![image](https://github.com/user-attachments/assets/402e1b43-9e22-4594-a01f-15b588d93af9)
+
+## Allocating X and Y attributes
+```
+x=df1.iloc[:,:-1].values
+x
+y=df1.iloc[:,-1].values
+y
+```
+![image](https://github.com/user-attachments/assets/ccbb5067-df8d-4ffc-a03f-6854e196c002)
+
+## Splitting the data into training and testing dataset
+```
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
+print(x_train)
+print(len(x_train))
+print(x_test)
+print(len(x_test))
+```
+![image](https://github.com/user-attachments/assets/1f2e7fa4-af2a-454f-a823-4179e8425b62)
 
 
 ## RESULT:
